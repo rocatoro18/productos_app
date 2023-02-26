@@ -35,4 +35,12 @@ class Product {
         "picture": picture,
         "price": price,
       };
+
+  Product copy() => Product(
+        available: available,
+        name: name,
+        picture: picture,
+        price: price,
+        id: id,
+      );
 }
