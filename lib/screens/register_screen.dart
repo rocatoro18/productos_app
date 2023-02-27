@@ -5,8 +5,8 @@ import 'package:productos_app/ui/input_decorations.dart';
 import 'package:productos_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      'Login',
+                      'Crear Cuenta',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(
@@ -41,14 +41,14 @@ class LoginScreen extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'register');
+                    Navigator.pushReplacementNamed(context, 'login');
                   },
                   style: ButtonStyle(
                       overlayColor: MaterialStateProperty.all(
                           Colors.indigo.withOpacity(0.1)),
                       shape: MaterialStateProperty.all(const StadiumBorder())),
                   child: const Text(
-                    'Crear una nueva cuenta',
+                    'Ya tienes una cuenta?',
                     style: TextStyle(fontSize: 18, color: Colors.black87),
                   )),
               const SizedBox(
@@ -131,14 +131,13 @@ class _LoginForm extends StatelessWidget {
 
                           // TODO: Validar si el login es correcto
 
-                          final String? errorMsg = await authService.login(
+                          final String? errorMsg = await authService.createUser(
                               loginForm.email, loginForm.password);
 
                           if (errorMsg == null) {
                             Navigator.pushReplacementNamed(context, 'home');
                           } else {
                             // TODO: Mostrar error en pantalla
-                            NotificationsService.showSnackBar(errorMsg);
                             print(errorMsg);
                             loginForm.isLoading = false;
                           }
